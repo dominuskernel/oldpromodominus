@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{%block titulo%}Acesso a sesión{%endblock%}
+{% block contenido %}
+	<div class="margen-login">
+		<div class="row-fluid">
+			<div class="span6">
+				<div class="unientrada">
+					<h2>Iniciar sesión</h2>
+				</div>
+				<div class="anuncios">
+                    <p>Puedes registrarte desde las redes sociales:</p>
+                    <a href="{% url "socialauth_begin" "twitter" %}"><img src="{{STATIC_URL}}img/logintwitter.png" alt="Login de Twitter" title="Twitter" class="loginsocial"/></a>
+                    <a href="{% url "socialauth_begin" "google-oauth2" %}"><img src="{{STATIC_URL}}img/googlebuttom.png" alt="Login de Google" title="Google" class="loginsocial"/></a>
+                    <a href="{% url "socialauth_begin" "facebook" %}"><img src="{{STATIC_URL}}img/facebookbuttom.png" alt="Login de facebook" title="Facebook" class="loginsocial"/></a><br/><br/>
+                    <p>También puedes registrarte desde tu cuenta de Promodominus:</p>
+					<form id='formulario' method='post' action=''>{% csrf_token %}
+						{{mensaje}}
+						{{formulario.as_p}}
+						<p><input type="submit" value="Acceder cuenta" class="btn btn-inverse"></p>
+					</form>
+					<p>Si no tienes cuenta en Promodominus y no deseas registrarte desde ninguna 
+                    red social puedes crear una pulsando <a style="text-decoration:none" href="/usuario/">aquí</a>.</p>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

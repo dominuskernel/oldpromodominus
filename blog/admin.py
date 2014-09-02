@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#Importamos los modulos para el administrador
+from blog.models import Entrada, Comentario, Imagen, Enlace, Rotulo
+from django.contrib import admin
+
+#Creamos la clase RotuloInline que sera llamado por inlines en la clase EntradaAdim
+#para despues poder añadir imagenes para el titulo del POST desde el administrador
+class RotuloInline(admin.StackedInline):
+	model = Rotulo
+	extra = 1
+    
+#Creamos la clase EnlaceInline que sera llamado por inlines en la clase EntradaAdim
+#para despues poder añadir enlaces desde el administrador
+class EnlaceInline(admin.StackedInline):
+	model = Enlace
+	extra = 1
+
+#Creamos la clase ImagenInline que sera llamado por inlines en la clase EntradaAdim
+#para despues poder añadir imagenes desde el administrador
+class ImagenInline(admin.StackedInline):
+	model = Imagen
+	extra = 1 
+
+#Creamos la clase ComentarioInline que sera llamado por inlines en la clase EntradaAdim
+#para despues poder añadir comentarios desde el administrador 
+class ComentarioInline(admin.StackedInline):
+	model = Comentario
+	extra = 1	
+	
+#Creamos la clase EntradaAdmin en el cual podremos desde el administrador del sitio
+#crear las entradas y añadir comentarios
+class EntradaAdmin(admin.ModelAdmin):
+	#Recoge los campos necesarios desde el modelo para el formulario
+	fieldsets = (
+		('Publicación', {
+			'fields': ('titulo', 'cuerpo', 'categoria')
+		}),
+	)
+	#Muestra los campos metidos en el fieldsets
+	list_display = ('titulo', 'cuerpo', 'categoria')
+	#Añade los comentarios a la entrada
+	inlines = [RotuloInline, ImagenInline, EnlaceInline ,ComentarioInline,]
+	#creat filtro en el listado de entrada por categoria y por fecha
+	list_filter = ('categoria','fecha_de_la_entrada')
+	#crea una busqueda con titulo
+	search_fields = ['titulo']
+	#oredena las entradas por fecha
+	ordering = ['fecha_de_la_entrada']
+
+    	#plugin de js para los botones de control del texto
+        class Media:
+            js = {
+            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            '/static/admin/js/tinymce_setup.js',
+            }
+            
+    
+    	change_list_template = "admin/change_list_filter_sidebar.html"
+    	change_list_filter_template = "admin/filter_listing.html"
+
+admin.site.register(Entrada, EntradaAdmin)

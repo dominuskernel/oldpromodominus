@@ -1,0 +1,110 @@
+{% extends 'base.html'%}
+{%block titulo%}Página de inicio{%endblock%}
+{%block contenido%}
+	<!--Botones para web-->
+	<div class="margenbotones">
+		<div class="row-fluid hidden-tablet hidden-phone">
+			<div class="span7">
+				<div class="btn-group">
+					<button class="btn btn-inverse" id="todo">Todos los anuncios</button>
+					<button class="btn btn-inverse" id="aplicaciones">Aplicaciones</button>
+					<button class="btn btn-inverse" id="cursos">Cursos</button>
+					<button class="btn btn-inverse" id="empresas">Empresas</button>
+					<button class="btn btn-inverse" id="eventos">Eventos</button>
+					<button class="btn btn-inverse" id="libros">Libros</button>
+					<button class="btn btn-inverse" id="multimedia">Multimedia</button>
+					<button class="btn btn-inverse" id="viajes">Viajes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <!--Botones para tablet y phone-->
+    <div class="row-fluid hidden-desktop">
+        <div class="span12">
+            <div class="btn-group">
+                <button class="btn btn-inverse" id="todo-mobile">Todos los anuncios</button>
+				<button class="btn btn-inverse" id="aplicaciones-mobile">Aplicaciones</button>
+				<button class="btn btn-inverse" id="cursos-mobile">Cursos</button>
+				<button class="btn btn-inverse" id="empresas-mobile">Empresas</button>
+				<button class="btn btn-inverse" id="eventos-mobile">Eventos</button>
+				<button class="btn btn-inverse" id="libros-mobile">Libros</button>
+				<button class="btn btn-inverse" id="multimedia-mobile">Multimedia</button>
+				<button class="btn btn-inverse" id="viajes-mobile">Viajes</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="siguenos-mobile">
+        <div class="hidden-desktop">
+            <a href="https://twitter.com/Promodominusweb" target="_blank"><img src="{{STATIC_URL}}img/twitter.png" alt="Logotipo de Twitter" title="Twitter" class="icono"/></a>
+            <a href="http://es.linkedin.com/pub/promodominus-tu-web-comercial/78/658/627/" target="_blank"><img src="{{STATIC_URL}}img/linkedin.png" alt="Logotipo de Linkedin" title="Linkedin" class="icono"/></a>
+            <a href="https://www.facebook.com/pages/Promodominus/486366524782593" target="_blank"><img src="{{STATIC_URL}}img/facebook.png" alt="Logotipo de Facebook" title="Facebook" class="icono"/></a>
+            <a href="http://promodominus.tumblr.com/" target="_blank"><img src="{{STATIC_URL}}img/tumblr.png" alt="Logotipo de tumblr" title="Tumblr" class="icono"/></a>
+        </div>
+    </div>
+    
+	<!--POST para web-->
+	<div class="margen">
+		{% for entrada in entradas%}
+			<div class="row-fluid hidden-tablet hidden-phone">
+				<div class="ancho {{entrada.categoria}}">
+					<div class="entrada">
+						<a href="/entrada/{{entrada.id}}"><h2 class="cambiaColor">{{entrada.titulo|upper}}</h2>
+						<span class="verentrada">(Pulse aquí para ver más)</span></a>
+						<span class="categoria">{{entrada.categoria}}</span>
+					</div>
+					<div class="anuncios">		
+						<p class="contenido">{{entrada.cuerpo|safe|truncatewords:"40"}}</p>
+						<span class="fecha">Publicado el {{entrada.fecha_de_la_entrada}}</span>
+					</div>
+				</div>
+			</div>	
+		{%endfor%}
+	</div>
+	<!--POST para movil y tablets-->
+	{% for entrada in entradas%}
+        <div class="margen-resumen hidden-desktop">
+            <div class="span12 {{entrada.categoria}}">
+                <div class="entrada">
+                    <a href="/entrada/{{entrada.id}}"><h2>{{entrada.titulo|upper}}
+                    <span class="verentrada">(Pulse aquí para ver más)</span></h2></a>
+                    <span class="categoria-mobile">{{entrada.categoria}}</span>
+                </div>
+                <div class="anuncios">		
+                    <p class="contenido">{{entrada.cuerpo|safe|truncatewords:"40"}}</p>
+                    <span class="fecha">Publicado el{{entrada.fecha_de_la_entrada}}</span>
+                </div>
+            </div>
+        </div>
+	{%endfor%}
+	<div class="span3b hidden-tablet hidden-phone">
+		<div class="entrada">
+			SIGUENOS EN
+		</div>
+		<div class="siguenos">
+			<a href="https://twitter.com/Promodominusweb" target="_blank"><img src="{{STATIC_URL}}img/twitter.png" alt="Logotipo de Twitter" title="Twitter" class="icono"/></a>
+			<a href="http://es.linkedin.com/pub/promodominus-tu-web-comercial/78/658/627/" target="_blank"><img src="{{STATIC_URL}}img/linkedin.png" alt="Logotipo de Linkedin" title="Linkedin" class="icono"/></a>
+			<a href="https://www.facebook.com/pages/Promodominus/486366524782593" target="_blank"><img src="{{STATIC_URL}}img/facebook.png" alt="Logotipo de Facebook" title="Facebook" class="icono"/></a>
+			<a href="http://promodominus.tumblr.com/" target="_blank"><img src="{{STATIC_URL}}img/tumblr.png" alt="Logotipo de tumblr" title="Tumblr" class="icono"/></a>
+		</div>
+	</div>
+	<div class="span3d hidden-tablet hidden-phone">
+		<div class="entrada">
+			LOS 5 ENLACES MÁS RECIENTES
+		</div>
+		<div class="siguenos">
+			{%for reciente in entradas_recientes%}
+				<p><a href="/entrada/{{reciente.id}}">{{forloop.counter}}.{{reciente.titulo|capfirst}}</a></p>
+			{%endfor%}
+		</div>
+	</div>
+    <div id="buscahoteles" class="hidden-tablet hidden-phone">
+        <div class="span3d">
+            <script type='text/javascript' src='http://www.hotelscombined.com/SearchBox/127519'></script>
+        </div> 
+    </div>
+    
+{%endblock%}
+

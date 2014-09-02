@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{%block titulo%}Registro{%endblock%}
+{%block contenido%}
+	<div class="margen-login">
+		<div class="row-fluid">
+			<div class="span6">
+				<div class="unientrada">
+					<h2>Registre su cuenta de usuario</h2>
+				</div>
+				<div class="anuncios">
+					<form id='formulario' method='post' action=''>{% csrf_token %}
+						<table>{{formulario.as_p}}</table>
+						<p><input type="submit" value="Registrar cuenta" class="btn btn-inverse"></p>
+					</form>
+				</div>	
+			</div>
+		</div>
+	</div>
+{%endblock%}
+

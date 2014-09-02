@@ -1,0 +1,282 @@
+{% extends 'base.html'%}
+{%block titulo%}{{entrada.titulo}}{%endblock%}
+{%block contenido%}
+    <div class="siguenos-mobile">
+        <div class="hidden-desktop">
+            <a href="https://twitter.com/Promodominusweb" target="_blank"><img src="{{STATIC_URL}}img/twitter.png" alt="Logotipo de Twitter" title="Twitter" class="icono"/></a>
+            <a href="http://es.linkedin.com/pub/promodominus-tu-web-comercial/78/658/627/" target="_blank"><img src="{{STATIC_URL}}img/linkedin.png" alt="Logotipo de Linkedin" title="Linkedin" class="icono"/></a>
+            <a href="https://www.facebook.com/pages/Promodominus/486366524782593" target="_blank"><img src="{{STATIC_URL}}img/facebook.png" alt="Logotipo de Facebook" title="Facebook" class="icono"/></a>
+            <a href="http://promodominus.tumblr.com/" target="_blank"><img src="{{STATIC_URL}}img/tumblr.png" alt="Logotipo de tumblr" title="Tumblr" class="icono"/></a>
+        </div>
+    </div>
+	<!--Post para web-->
+	<div class="contenedor">
+		<div class="margen">
+			<div class="row-fluid hidden-tablet hidden-phone">
+				<div class="ancho">
+					<div class="unientrada">
+						<h2>{{entrada.titulo}}</h2>
+					</div> <!--cierra unientrada-->
+					<div class="textoentrada">	
+						{%for rotulo in rotulos%}
+							<div class=rotulo><img src='{{MEDIA_URL}}{{rotulo.foto}}' alt="{{entrada.titulo}}" class="rotulo-tam" title="titulo del post" /></div>
+						{%endfor%}
+						<p>{{entrada.cuerpo|safe}}</p>
+						<div class="anchoimg">
+							<div id="miCarousel" class="carousel slide">
+								<ol class="carousel-indicators">
+									{%for imagen in imagenes%}
+										{%if forloop.first%}
+											<li data-target="#miCarousel" data-slide-to="{{ forloop.counter }}" class="active"></li>
+										{%else%}
+										<li data-target="#miCarousel" data-slide-to="{{ forloop.counter }}"></li>
+										{%endif%}
+									{%endfor%}
+								</ol>
+								<div class="carousel-inner">
+									{%for imagen in imagenes%}
+										{% if forloop.first %}
+											<div class="active item"><img src='{{MEDIA_URL}}{{imagen.foto}}' class="img-polaroid imagen"></div>
+										{%else%}
+											<div class="item"><img src='{{MEDIA_URL}}{{imagen.foto}}' class="img-polaroid imagen"></div>
+										{%endif%}
+									{%endfor%}
+								</div>  <!--cierra carousel-inner-->
+								<a class="carousel-control left" href="#miCarousel" data-slide="prev">&lsaquo;</a>
+								<a class="carousel-control right" href="#miCarousel" data-slide="next">&rsaquo;</a>
+							</div> <!--cierra miCarousel-->
+						</div> <!--cierra anchoimg-->
+						<br><br/>
+						{%for enlace in enlaces%}
+							<p>Fuente: <a href={{enlace.link}}>{{enlace.titulo}}</a></p>
+						{%endfor%}
+						<p class="fecha">Publicado el {{entrada.fecha_de_la_entrada}}</p>
+						<p class="redes">Animamos a compartir la publicación en:</p>
+						<!-- Place this tag where you want the +1 button to render. -->
+						<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="195"></div><!--cierra g-plusone-->
+
+						<!-- Place this tag after the last +1 button tag. -->
+						<script type="text/javascript">
+							window.___gcfg = {lang: 'es'};
+							(function() {
+								var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+								po.src = 'https://apis.google.com/js/plusone.js';
+								var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+							})();
+						</script>
+						<span id="fb-root"></span>
+						<script>(function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1&appId=554691437901657";
+								fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));
+						</script>
+							<span class="fb-like" data-href="http://promodominus.com/entrada/{{entrada.id}}" data-width="300" data-layout="button_count" data-show-faces="true" data-send="true"></span>
+								&nbsp;&nbsp;&nbsp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://promodominus.com/entrada/{{entrada.id}}" data-via="Promodominusweb" data-lang="es">Twittear</a>
+						<script>
+							!function(d,s,id){
+								var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+								if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+									fjs.parentNode.insertBefore(js,fjs);
+							}}(document, 'script', 'twitter-wjs');
+						</script>
+						<a href="http://www.tumblr.com/share" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:129px; height:20px; background:url('http://platform.tumblr.com/v1/share_3.png') top left no-repeat transparent;">Share on Tumblr</a>
+					</div> <!--cierra textoentrada-->
+				</div> <!--ancho-->
+			</div> <!--cierra row-fluid hidden-tablet hidden-phone-->
+		</div> <!--cierra margen-->
+		
+		<!--siguenos-->
+		<div class="span3b hidden-tablet hidden-phone">
+			<div class="entrada">
+				SIGUENOS EN
+			</div>
+			<div class="siguenos">
+				<a href="https://twitter.com/Promodominusweb" target="_blank"><img src="{{STATIC_URL}}img/twitter.png" alt="Logotipo de Twitter" title="Twitter" class="icono"/></a>
+				<a href="http://es.linkedin.com/pub/promodominus-tu-web-comercial/78/658/627/" target="_blank"><img src="{{STATIC_URL}}img/linkedin.png" alt="Logotipo de Linkedin" title="Linkedin" class="icono"/></a>
+				<a href="https://www.facebook.com/pages/Promodominus/486366524782593" target="_blank"><img src="{{STATIC_URL}}img/facebook.png" alt="Logotipo de Facebook" title="Facebook" class="icono"/></a>
+				<a href="http://promodominus.tumblr.com/" target="_blank"><img src="{{STATIC_URL}}img/tumblr.png" alt="Logotipo de tumblr" title="Tumblr" class="icono"/></a>
+			</div>
+		</div> <!--cierre siguenos-->
+        
+		<!--Enlaces recientes-->
+		<div class="span3d hidden-tablet hidden-phone">
+			<div class="entrada">
+				LOS 5 ENLACES MÁS RECIENTES
+			</div>
+			<div class="siguenos">
+				{%for reciente in entradas_recientes%}
+					<p><a href="/entrada/{{reciente.id}}">{{forloop.counter}}.{{reciente.titulo|capfirst}}</a></p>
+				{%endfor%}
+			</div>
+		</div><!-- cierre entrada recientes-->
+		
+        {% if entrada.categoria == 'Viajes' %}
+            <div class="span3d">
+                <script type='text/javascript' src='http://www.hotelscombined.com/SearchBox/127519'></script>
+            </div> 
+        {%endif%}
+        
+		<!--Comentarios para web-->
+		{%for comentario in comentarios%}
+			<div class="comentario">
+				<div class="row-fluid hidden-tablet hidden-phone">
+					<div class="ancho">
+						<div class="entrada">
+							<em>Comentario de {{comentario.usuario}}:</em>
+						</div>
+						<div class="comentarios">		
+							<p>{{comentario.texto|urlize}}</p>
+							<p class="fecha">Publicado el {{comentario.fecha_de_la_publicacion}}</p>
+						</div>
+					</div>
+				</div>	
+			</div>	<!--Cierre comentarios-->			
+		{%endfor%}
+
+		<!--Insertar comentario para web-->
+		{%if user.is_authenticated%}
+		<div class="comentario">
+			<div class="row-fluid hidden-tablet hidden-phone">
+				<div class="ancho">
+					<div class="entrada">
+						<h3 class="ticoment">Comentar</h3>
+					</div>
+					<div class="comentarios">		
+						<form id='formcom' method='post' action=''>{% csrf_token %}
+							{{formulario.texto}}
+							<p><input type="submit" value="Publicar comentario" class="btn btn-inverse"></p>
+						</form>
+					</div>
+				</div>
+			</div>	
+		</div><!--cierre introducir comentarios-->	
+        {%else%}
+        
+        <!--Insertar alerta de que no estas conectado en web-->
+            <div class="comentario">
+                <div class="row-fluid hidden-tablet hidden-phone">
+                    <div class="ancho">
+                        <div class="entrada">
+                            <em>No has iniciado sesión</em>
+                        </div>
+                        <div class="alerta">		
+                            Debes de iniciar sesión para poder comentar sobre {{entrada.titulo}}.
+                        </div>
+                    </div>
+                </div>	
+            </div><!--cierre de alerta-->	
+ 
+        
+		{%endif%}
+	</div> <!--cierra el contenedor-->
+	
+	
+	<!--Post para tablet y phone-->
+		<div class="span12 hidden-desktop margen-post">
+			<div class="unientrada">
+				<h2>{{entrada.titulo}}</h2>
+			</div> <!--cierra unientrada-->
+			<div class="textoentradamobile">	
+                {%for rotulo in rotulos%}
+                    <div class=rotulo><img src='{{MEDIA_URL}}{{rotulo.foto}}' alt="{{entrada.titulo}}" class="rotulo-tam" title="titulo del post" /></div>
+                {%endfor%}
+				<p>{{entrada.cuerpo|safe}}</p>
+				<br><br/>
+                <div class="anchoimg">
+                        <div id="miCarousel" class="carousel slide">
+                            <ol class="carousel-indicators">
+                                {%for imagen in imagenes%}
+                                    {%if forloop.first%}
+                                        <li data-target="#miCarousel" data-slide-to="{{ forloop.counter }}" class="active"></li>
+                                    {%else%}
+                                    <li data-target="#miCarousel" data-slide-to="{{ forloop.counter }}"></li>
+                                    {%endif%}
+                                {%endfor%}
+                            </ol>
+                            <div class="carousel-inner">
+                                {%for imagen in imagenes%}
+                                    {% if forloop.first %}
+                                        <div class="active item"><img src='{{MEDIA_URL}}{{imagen.foto}}' class="img-polaroid imagen"></div>
+                                    {%else%}
+                                        <div class="item"><img src='{{MEDIA_URL}}{{imagen.foto}}' class="img-polaroid imagen"></div>
+                                    {%endif%}
+                                {%endfor%}
+                            </div>  <!--cierra carousel-inner-->
+                            <a class="carousel-control left" href="#miCarousel" data-slide="prev">&lsaquo;</a>
+                            <a class="carousel-control right" href="#miCarousel" data-slide="next">&rsaquo;</a>
+                        </div> <!--cierra miCarousel-->
+                    </div> <!--cierra anchoimg-->
+				{%for enlace in enlaces%}
+					<p>Fuente: <a href={{enlace.link}}>{{enlace.titulo}}</a></p>
+				{%endfor%}
+				<p class="fecha">Publicado el {{entrada.fecha_de_la_entrada}}</p>
+				<p class="redes">Animamos a compartir la publicación en:</p>
+				<!-- Place this tag where you want the +1 button to render. -->
+				<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="195"></div><!--cierra g-plusone-->
+
+				<!-- Place this tag after the last +1 button tag. -->
+				<script type="text/javascript">
+					window.___gcfg = {lang: 'es'};
+					(function() {
+						var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+						po.src = 'https://apis.google.com/js/plusone.js';
+						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+					})();
+				</script>
+				<span id="fb-root"></span>
+				<script>(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1&appId=554691437901657";
+					fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
+				<span class="fb-like" data-href="http://promodominus.com/entrada/{{entrada.id}}" data-width="300" data-layout="button_count" data-show-faces="true" data-send="true"></span>
+				&nbsp;&nbsp;&nbsp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://promodominus.com/entrada/{{entrada.id}}" data-via="Promodominusweb" data-lang="es">Twittear</a>
+				<script>
+					!function(d,s,id){
+						var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+						if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+						fjs.parentNode.insertBefore(js,fjs);
+					}}(document, 'script', 'twitter-wjs');
+				</script>
+				<a href="http://www.tumblr.com/share" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:129px; height:20px; background:url('http://platform.tumblr.com/v1/share_3.png') top left no-repeat transparent;">Share on Tumblr</a>
+			</div> <!--cierra textoentrada-->
+		</div> <!--span7 hidden-desktop-->
+	
+	
+	<!--Comentarios para tablet y phone-->
+	{%for comentario in comentarios%}
+		<div class="span12 hidden-desktop">
+			<div class="entrada">
+				<em>Comentario de {{comentario.usuario}}:</em>
+			</div>
+			<div class="comentarios">		
+				<p>{{comentario.texto|urlize}}</p>
+				<p class="fecha">Publicado el {{comentario.fecha_de_la_publicacion}}</p>
+			</div>
+		</div>				
+	{%endfor%}	
+
+	<!--comentario para tablet y phone-->
+        {%if user.is_authenticated%}
+			<div class="span12 hidden-desktop">
+				<div class="ancho">
+					<div class="entrada">
+						<h3 class="ticoment">Comentar</h3>
+					</div>
+					<div class="comentarios">		
+						<form id='formcom' method='post' action=''>{% csrf_token %}
+							{{formulario.texto}}
+							<p><input type="submit" value="Publicar comentario" class="btn btn-inverse"></p>
+						</form>
+					</div>
+				</div>
+			</div><!--cierre introducir comentarios-->
+        {%endif%}
+{%endblock%}
+	
